@@ -13,7 +13,7 @@ fetch('https://api.ipify.org?format=json', {mode: 'cors'})
                 }
                 })
               .then(response => {
-                response.json()
+                  console.log(response.json())
               })
               .catch(err => {
                 console.error(err);
