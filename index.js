@@ -1,4 +1,5 @@
 // Gather All Necessary Information!
+let data
 let city
 fetch('https://api.ipify.org?format=json', {mode: 'cors'})
   .then(response => response.json())
@@ -16,7 +17,7 @@ fetch('https://api.ipify.org?format=json', {mode: 'cors'})
               .then(response => {
                   return response.json()
               })
-              .then(response => console.log())
+              .then(response => data = response)
               .catch(err => {
                 console.error(err);
               });
@@ -30,9 +31,9 @@ const currLocation = document.querySelector('[data-location]')
 const currState = document.querySelector('[data-curr-state]')
 const currImg = document.querySelector('[data-curr-img]')
 const currTemp = document.querySelector('[data-curr-temp]')
-const currHum = document.querySelector('[data-curr-hum]')
+const currFeel = document.querySelector('[data-curr-feel]')
 const currWind = document.querySelector('[data-curr-wind]')
-const currPrecip = document.querySelector('[data-curr-precip]')
+const currHum = document.querySelector('[data-curr-hum]')
 const currWetherDescription = document.querySelector('[data-curr-desc]')
 const dayOne = document.querySelector('[data-first-day]')
 const dayTwo = document.querySelector('[data-first-day]')
@@ -50,6 +51,9 @@ const hourOne = document.querySelector('[data-time-one]')
 const hourTwo = document.querySelector('[data-time-two]')
 const hourThree = document.querySelector('[data-time-three]')
 const hourFour = document.querySelector('[data-time-four]')
+const hourFive = document.querySelector('[data-time-five]')
+const hourFiveImg = document.querySelector('[data-time-five-img]')
+const hourFiveTemp = document.querySelector('[data-time-five-temp]')
 const hourOneImg = document.querySelector('[data-time-one-img]')
 const hourTwoImg = document.querySelector('[data-time-two-img]')
 const hourThreeImg = document.querySelector('[data-time-three-img]')
@@ -58,6 +62,14 @@ const hourOneTemp = document.querySelector('[data-time-one-temp]')
 const hourTwoTemp = document.querySelector('[data-time-two-temp]')
 const hourThreeTemp = document.querySelector('[data-time-three-temp]')
 const hourFourTemp = document.querySelector('[data-time-four-temp]')
+let address
+let state
+let main_temp
+let curr_feel
+let curr_hum
+let curr_wind
+let desc
+
 // Functions
 function getDayOfWeek(dateString) {
     const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -65,40 +77,53 @@ function getDayOfWeek(dateString) {
     const dayIndex = date.getDay();
     return daysOfWeek[dayIndex];
 }
-
+  setTimeout(() => {
+    console.log(data)
+    address = data.resolvedAddress
+    state = data.currentConditions.conditions
+    curr_temp = Math.round(data.currentConditions.temp)
+    curr_feel = data.currentConditions.feelslike
+    curr_hum = data.currentConditions.humidity
+    curr_wind = data.currentConditions.windspeed
+    desc = data.description
+    curr_icon = data.currentConditions.icon
+  }, 1000)
 // getDayOfWeek(response.days[].datetime)) Get The day for week forecast
 
 function updateData()
 {
-  currLocation.textContent = `${city}`
-  currState.textContent = `${}`
-  currImg.src = `${currImgSrc}`
-  currTemp.textContent = `${}`
-  currHum.textContent = `${}`
-  currWind.textContent = `${}`
-  currPrecip.textContent = `${}`
-  currWetherDescription.textContent = `${}`
-  dayOne.textContent = `${}`
-  dayTwo.textContent = `${}`
-  dayThree.textContent = `${}`
-  dayFour.textContent = `${}`
-  dayOneImg.src = `${dayOneImgSrc}`
-  dayTwoImg.src = `${dayTwoImgSrc}`
-  dayThreeImg.src = `${dayThreeImgSrc}`
-  dayFourImg.src = `${dayFourImgSrc}`
-  dayOneTemp.textContent = `${}`
-  dayTwoTemp.textContent = `${}`
-  dayThreeTemp.textContent = `${}`
-  dayFourTemp.textContent = `${}`
-  hourTwo.textContent = `${}`
-  hourThree.textContent = `${}`
-  hourFour.textContent = `${}`
-  hourOneImg.src = `${hourOnwImgSrc}`
-  hourTwoImg.src = `${hourTwoImgSrc}`
-  hourThreeImg.src = `${hourThreeImgSrc}`
-  hourFourImg.src = `${hourFourImgSrc}`
-  hourOneTemp.textContent = `${}`
-  hourTwoTemp.textContent = `${}`
-  hourThreeTemp.textContent = `${}`
-  hourFourTemp.textContent = `${}`
+  currLocation.textContent = `${address}`
+  currState.textContent = `${state}`
+  currImg.src = `/src/images/${curr_icon}.svg`
+  currTemp.textContent = `${curr_temp}°C`
+  currFeel.textContent = `${curr_feel}°C`
+  currWind.textContent = `${curr_wind} m/s`
+  currHum.textContent = `${curr_hum} %`
+  currWetherDescription.textContent = `${desc}`
+//   dayOne.textContent = `${}`
+//   dayTwo.textContent = `${}`
+//   dayThree.textContent = `${}`
+//   dayFour.textContent = `${}`
+//   dayOneImg.src = `${dayOneImgSrc}`
+//   dayTwoImg.src = `${dayTwoImgSrc}`
+//   dayThreeImg.src = `${dayThreeImgSrc}`
+//   dayFourImg.src = `${dayFourImgSrc}`
+//   dayOneTemp.textContent = `${}`
+//   dayTwoTemp.textContent = `${}`
+//   dayThreeTemp.textContent = `${}`
+//   dayFourTemp.textContent = `${}`
+//   hourTwo.textContent = `${}`
+//   hourThree.textContent = `${}`
+//   hourFour.textContent = `${}`
+//   hourFive.textContent = `${}`
+//   hourOneImg.src = `${hourOnwImgSrc}`
+//   hourTwoImg.src = `${hourTwoImgSrc}`
+//   hourThreeImg.src = `${hourThreeImgSrc}`
+//   hourFourImg.src = `${hourFourImgSrc}`
+//   hourFiveImg.src = `${hourFiveImgSrc}`
+//   hourOneTemp.textContent = `${}`
+//   hourTwoTemp.textContent = `${}`
+//   hourThreeTemp.textContent = `${}`
+//   hourFourTemp.textContent = `${}`
+//   hourFiveTemp.textContent = `${}`
 }
