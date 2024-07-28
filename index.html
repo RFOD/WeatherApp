@@ -18,41 +18,41 @@
         <section class="grid grid-cols-2 grid-rows-2">
             <div class="flex justify-center col-span-2">
                 <div class="flex items-center p-6 bg-[#00000007] flex-col rounded">
-                    <h1 class="font-semibold text-lg">Chisinau, Moldova</h1>
-                    <h2>Cloudy</h2>
-                    <img src="src/images/partly-cloudy-day.png" alt="cloudy day icon" class="h-[100px] mb-[0.6rem]">
-                    <h1 class="font-semibold text-lg mb-[1.2rem]">24°C</h1>
-                    <div class="grid grid-cols-2 grid-rows-3 gap-2 mb-[70px]">
+                    <h1 class="font-semibold text-lg" data-location>Chisinau, Moldova</h1>
+                    <h2 data-curr-state>Cloudy</h2>
+                    <img data-curr-img src="src/images/partly-cloudy-day.png" alt="cloudy day icon" class="h-[100px] mb-[0.6rem]">
+                    <h1 data-curr-temp class="font-semibold text-lg mb-[1.2rem]">24°C</h1>
+                    <div class="grid grid-cols-2 grid-rows-3 gap-2 mb-[40px]">
                         <h2 class="flex justify-center">Humidity</h2>
-                        <h2 class="flex justify-center">88%</h2>
+                        <h2 data-curr-hum class="flex justify-center">88%</h2>
                         <h2 class="flex justify-center">Wind Speed</h2>
-                        <h2 class="flex justify-center"> 5m/s</h2>
+                        <h2 data-curr-wind class="flex justify-center"> 5m/s</h2>
                         <h2 class="flex justify-center">Precipitation</h2>
-                        <h2 class="flex justify-center">67%</h2>
+                        <h2 data-curr-precip class="flex justify-center">67%</h2>
                     </div>
-                    <h2 class="p-[10px] rounded-xl bg-[#00000005] flex justify-center items-center">Similar temperatures continuing with no rain expected.</h2>
+                    <h2 data-curr-desc class="p-[15px] rounded-xl bg-[#00000005] flex text-center">Similar temperatures continuing with no rain expected.</h2>
                 </div>
                 <div class="ml-[2rem] grid grid-cols-[170px_170px] grid-rows-[40px_170px_170px] gap-4">
                     <h1 class="font-semibold text-xl col-span-2 justify-center flex">Week Forecast</h1>
                     <div class="items-center flex bg-[#00000007] rounded-md flex-col">
-                        <h2 class="m-4 font-semibold text-lg">Tuesday</h2>
-                        <img src="src/images/partly-cloudy-day.png" alt="partly-cloudy-day" class="w-[70px] h-[70px]">
-                        <h2 class="font-semibold">27°C</h2>
+                        <h2 data-first-day class="m-4 font-semibold text-lg">Tuesday</h2>
+                        <img data-first-day-img src="src/images/partly-cloudy-day.png" alt="partly-cloudy-day" class="w-[70px] h-[70px]">
+                        <h2 data-first-day-temp class="font-semibold">27°C</h2>
                     </div>
                     <div class="items-center flex bg-[#00000007] rounded-md flex-col">
-                        <h2 class="m-4 font-semibold text-lg">Wednesday</h2>
-                        <img src="src/images/rain.png" alt="partly-cloudy-day" class="w-[70px] h-[70px]">
-                        <h2 class="font-semibold">25°C</h2>
+                        <h2 data-sec-day class="m-4 font-semibold text-lg">Wednesday</h2>
+                        <img data-sec-day-img src="src/images/rain.png" alt="partly-cloudy-day" class="w-[70px] h-[70px]">
+                        <h2 data-sec-day-temp class="font-semibold">25°C</h2>
                     </div>
                     <div class="items-center flex bg-[#00000007] rounded-md flex-col">
-                        <h2 class="m-4 font-semibold text-lg">Thursday</h2>
-                        <img src="src/images/clear-day.png" alt="partly-cloudy-day" class="w-[70px] h-[70px]">
-                        <h2 class="font-semibold">20°C</h2>
+                        <h2 data-third-day class="m-4 font-semibold text-lg">Thursday</h2>
+                        <img data-third-day-img src="src/images/clear-day.png" alt="partly-cloudy-day" class="w-[70px] h-[70px]">
+                        <h2 data-third-day-temp class="font-semibold">20°C</h2>
                     </div>
                     <div class="items-center flex bg-[#00000007] rounded-md flex-col">
-                        <h2 class="m-4 font-semibold text-lg">Friday</h2>
-                        <img src="src/images/partly-cloudy-day.png" alt="partly-cloudy-day" class="w-[70px] h-[70px]">
-                        <h2 class="font-semibold">26°C</h2>
+                        <h2 data-fourth-day class="m-4 font-semibold text-lg">Friday</h2>
+                        <img data-fourth-day-img src="src/images/partly-cloudy-day.png" alt="partly-cloudy-day" class="w-[70px] h-[70px]">
+                        <h2 data-fourth-day-temp class="font-semibold">26°C</h2>
                     </div>
                 </div>
             </div>
@@ -62,33 +62,33 @@
                     <h2 class="col-span-6 flex justify-center font-normal text-lg mb-16">Local Time</h2>
                     <div class="items-center flex bg-[#00000007] rounded-md flex-col">
                         <h2 class="m-4 font-semibold text-lg">Now</h2>
-                        <img src="src/images/partly-cloudy-day.png" alt="partly-cloudy-day" class="w-[70px] h-[70px]">
-                        <h2 class="font-semibold">24°C</h2>
+                        <img data-curr-img src="src/images/partly-cloudy-day.png" alt="partly-cloudy-day" class="w-[70px] h-[70px]">
+                        <h2 data-curr-temp="" class="font-semibold">24°C</h2>
                     </div>
                     <div class="items-center flex bg-[#00000007] rounded-md flex-col">
-                        <h2 class="m-4 font-semibold text-lg">00:00</h2>
-                        <img src="src/images/partly-cloudy-day.png" alt="partly-cloudy-day" class="w-[70px] h-[70px]">
-                        <h2 class="font-semibold">22°C</h2>
+                        <h2 data-time-one class="m-4 font-semibold text-lg">00:00</h2>
+                        <img data-time-one-img src="src/images/partly-cloudy-day.png" alt="partly-cloudy-day" class="w-[70px] h-[70px]">
+                        <h2 data-time-one-temp class="font-semibold">22°C</h2>
                     </div>
                     <div class="items-center flex bg-[#00000007] rounded-md flex-col">
-                        <h2 class="m-4 font-semibold text-lg">01:00</h2>
-                        <img src="src/images/partly-cloudy-day.png" alt="partly-cloudy-day" class="w-[70px] h-[70px]">
-                        <h2 class="font-semibold">20°C</h2>
+                        <h2 data-time-two class="m-4 font-semibold text-lg">01:00</h2>
+                        <img data-time-two-img src="src/images/partly-cloudy-day.png" alt="partly-cloudy-day" class="w-[70px] h-[70px]">
+                        <h2 data-time-two-temp class="font-semibold">20°C</h2>
                     </div>
                     <div class="items-center flex bg-[#00000007] rounded-md flex-col">
-                        <h2 class="m-4 font-semibold text-lg">02:00</h2>
-                        <img src="src/images/rain.png" alt="partly-cloudy-day" class="w-[70px] h-[70px]">
-                        <h2 class="font-semibold">18°C</h2>
+                        <h2 data-time-three class="m-4 font-semibold text-lg">02:00</h2>
+                        <img data-time-three-img src="src/images/rain.png" alt="partly-cloudy-day" class="w-[70px] h-[70px]">
+                        <h2 data-time-three-temp class="font-semibold">18°C</h2>
                     </div>
                     <div class="items-center flex bg-[#00000007] rounded-md flex-col">
-                        <h2 class="m-4 font-semibold text-lg">03:00</h2>
-                        <img src="src/images/partly-cloudy-day.png" alt="partly-cloudy-day" class="w-[70px] h-[70px]">
-                        <h2 class="font-semibold">17°C</h2>
+                        <h2 data-time-four class="m-4 font-semibold text-lg">03:00</h2>
+                        <img data-time-four-img src="src/images/partly-cloudy-day.png" alt="partly-cloudy-day" class="w-[70px] h-[70px]">
+                        <h2 data-time-four-temp class="font-semibold">17°C</h2>
                     </div>
                     <div class="items-center flex bg-[#00000007] rounded-md flex-col">
-                        <h2 class="m-4 font-semibold text-lg">00:00</h2>
-                        <img src="src/images/partly-cloudy-day.png" alt="partly-cloudy-day" class="w-[70px] h-[70px]">
-                        <h2 class="font-semibold">22°C</h2>
+                        <h2 data-time-five class="m-4 font-semibold text-lg">00:00</h2>
+                        <img data-time-five-img src="src/images/partly-cloudy-day.png" alt="partly-cloudy-day" class="w-[70px] h-[70px]">
+                        <h2 data-time-five-temp class="font-semibold">22°C</h2>
                     </div>
             </div>
             </div>
