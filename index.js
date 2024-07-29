@@ -9,7 +9,7 @@ fetch('https://api.ipify.org?format=json', {mode: 'cors'})
         .then(result => result.json())
         .then(result => {
             city = result.city
-            fetch('https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/' + `${city}` + '?unitGroup=metric&include=fcst%2Cdays%2Ccurrent&key=LSKVJSNUZRML83YMQ5K2MCNKE&options=stnslevel1&contentType=json', {
+            fetch('https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/' + `${city}` + '?unitGroup=metric&include=days%2Chours%2Ccurrent&key=LSKVJSNUZRML83YMQ5K2MCNKE&contentType=json', {
                 "method": "GET",
                 "headers": {
                 }
@@ -26,6 +26,16 @@ fetch('https://api.ipify.org?format=json', {mode: 'cors'})
   .catch(error => {
     console.error('Error fetching IP:', error);
   })
+// Carousel
+
+var elem = document.querySelector('.main-carousel');
+var flkty = new Flickity( elem, {
+  cellAlign: 'center',
+  contain: false,
+  groupCells: true,
+  autoPlay: true
+});
+
 // Initiating DOM elements to be changed!
 const currLocation = document.querySelector('[data-location]')
 const currState = document.querySelector('[data-curr-state]')
@@ -34,7 +44,6 @@ const currTemp = document.querySelector('[data-curr-temp]')
 const currFeel = document.querySelector('[data-curr-feel]')
 const currWind = document.querySelector('[data-curr-wind]')
 const currHum = document.querySelector('[data-curr-hum]')
-const currWetherDescription = document.querySelector('[data-curr-desc]')
 const dayOne = document.querySelector('[data-first-day]')
 const dayTwo = document.querySelector('[data-first-day]')
 const dayThree = document.querySelector('[data-first-day]')
@@ -64,11 +73,35 @@ const hourThreeTemp = document.querySelector('[data-time-three-temp]')
 const hourFourTemp = document.querySelector('[data-time-four-temp]')
 let address
 let state
-let main_temp
+let curr_temp
 let curr_feel
 let curr_hum
 let curr_wind
 let desc
+let dayOneIconSrc
+let dayTwoIconSrc
+let dayThreeIconSrc
+let dayFourIconSrc
+let dayOneTempSrc
+let dayTwoTempSrc
+let dayThreeTempSrc
+let dayFourTempSrc
+let dayOneName
+let dayTwoName
+let dayThreeName
+let dayFourName
+let oneHour
+let twoHour
+let threeHour
+let fourHour
+let oneHourImg
+let twoHourImg
+let threeHourImg
+let fourHourImg
+let oneHourTemp
+let twoHourTemp
+let threeHourTemp
+let fourHourTemp
 
 // Functions
 function getDayOfWeek(dateString) {
@@ -87,8 +120,35 @@ function getDayOfWeek(dateString) {
     curr_wind = data.currentConditions.windspeed
     desc = data.description
     curr_icon = data.currentConditions.icon
+    dayOneIconSrc = data.days[0].icon
+    dayTwoIconSrc = data.days[1].icon
+    dayThreeIconSrc = data.days[2].icon
+    dayFourIconSrc = data.days[3].icon
+    dayOneTempSrc = data.days[0].temp
+    dayTwoTempSrc = data.days[1].temp
+    dayThreeTempSrc = data.days[2].temp
+    dayFourTempSrc = data.days[3].temp
+    dayOneName = getDayOfWeek(data.days[0].datetime)
+    dayTwoName = getDayOfWeek(data.days[1].datetime)
+    dayThreeName = getDayOfWeek(data.days[2].datetime)
+    dayFourName = getDayOfWeek(data.days[3].datetime)
+    // oneHour = data.currentConditions.
+    // twoHour = data.currentConditions.
+    // threeHour = data.currentConditions.
+    // fourHour = data.currentConditions.
+    // oneHourImg = data.currentConditions.
+    // twoHourImg = data.currentConditions.
+    // threeHourImg = data.currentConditions.
+    // fourHourImg = data.currentConditions.
+    // oneHourTemp = data.currentConditions.
+    // twoHourTemp = data.currentConditions.
+    // threeHourTemp = data.currentConditions.
+    // fourHourTemp = data.currentConditions.
+    hourOne
+    updateData()
   }, 1000)
-// getDayOfWeek(response.days[].datetime)) Get The day for week forecast
+  
+//  Get The day for week forecast
 
 function updateData()
 {
@@ -96,22 +156,21 @@ function updateData()
   currState.textContent = `${state}`
   currImg.src = `/src/images/${curr_icon}.svg`
   currTemp.textContent = `${curr_temp}°C`
-  currFeel.textContent = `${curr_feel}°C`
+  currFeel.textContent = `${Math.round(curr_feel)}°C`
   currWind.textContent = `${curr_wind} m/s`
   currHum.textContent = `${curr_hum} %`
-  currWetherDescription.textContent = `${desc}`
-//   dayOne.textContent = `${}`
-//   dayTwo.textContent = `${}`
-//   dayThree.textContent = `${}`
-//   dayFour.textContent = `${}`
-//   dayOneImg.src = `${dayOneImgSrc}`
-//   dayTwoImg.src = `${dayTwoImgSrc}`
-//   dayThreeImg.src = `${dayThreeImgSrc}`
-//   dayFourImg.src = `${dayFourImgSrc}`
-//   dayOneTemp.textContent = `${}`
-//   dayTwoTemp.textContent = `${}`
-//   dayThreeTemp.textContent = `${}`
-//   dayFourTemp.textContent = `${}`
+  dayOne.textContent = `${dayOneName}`
+  dayTwo.textContent = `${dayTwoName}`
+  dayThree.textContent = `${dayThreeName}`
+  dayFour.textContent = `${dayFourName}`
+  dayOneImg.src = `/src/images/${dayOneIconSrc}.svg`
+  dayTwoImg.src = `/src/images/${dayTwoIconSrc}.svg`
+  dayThreeImg.src = `/src/images/${dayThreeIconSrc}.svg`
+  dayFourImg.src = `/src/images/${dayFourIconSrc}.svg`
+  dayOneTemp.textContent = `${Math.round(dayOneTempSrc)}°C`
+  dayTwoTemp.textContent = `${Math.round(dayTwoTempSrc)}°C`
+  dayThreeTemp.textContent = `${Math.round(dayThreeTempSrc)}°C`
+  dayFourTemp.textContent = `${Math.round(dayFourTempSrc)}°C`
 //   hourTwo.textContent = `${}`
 //   hourThree.textContent = `${}`
 //   hourFour.textContent = `${}`

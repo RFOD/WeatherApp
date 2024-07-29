@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./src/output.css">
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js" defer></script>
     <script src="index.js" defer></script>
     <title>Weather App</title>
 </head>
@@ -17,20 +19,19 @@
 
         <section class="grid grid-cols-2 grid-rows-2">
             <div class="flex justify-center col-span-2">
-                <div class="flex items-center p-6 bg-[#00000007] flex-col rounded">
+                <div class="flex items-center p-6 bg-[#00000007] flex-col rounded justify-center">
                     <h1 class="font-semibold text-lg" data-location>Chisinau, Moldova</h1>
-                    <h2 data-curr-state>Cloudy</h2>
-                    <img data-curr-img src="src/images/clear-night.svg" alt="cloudy day icon" class="h-[100px] mb-[0.6rem]">
+                    <h2 data-curr-state class="mb-2">Cloudy</h2>
+                    <img data-curr-img src="src/images/clear-night.svg" alt="" class="h-[100px] mb-[0.6rem]">
                     <h1 data-curr-temp class="font-semibold text-lg mb-[1.2rem]">24°C</h1>
-                    <div class="grid grid-cols-2 grid-rows-3 gap-2 mb-[40px]">
+                    <div class="grid grid-cols-2 grid-rows-3 gap-2">
+                        <h2 class="flex justify-center">Humidity</h2>
+                        <h2 data-curr-hum class="flex justify-center">67%</h2>
                         <h2 class="flex justify-center">Feels Like</h2>
                         <h2 data-curr-feel class="flex justify-center">88%</h2>
                         <h2 class="flex justify-center">Wind Speed</h2>
-                        <h2 data-curr-wind class="flex justify-center"> 5m/s</h2>
-                        <h2 class="flex justify-center">Humidity</h2>
-                        <h2 data-curr-hum class="flex justify-center">67%</h2>
+                        <h2 data-curr-wind class="flex justify-center">5m/s</h2>
                     </div>
-                    <h2 data-curr-desc class="p-[15px] rounded-xl bg-[#00000005] flex text-center"></h2>
                 </div>
                 <div class="ml-[2rem] grid grid-cols-[170px_170px] grid-rows-[40px_170px_170px] gap-4">
                     <h1 class="font-semibold text-xl col-span-2 justify-center flex">Week Forecast</h1>
@@ -56,48 +57,98 @@
                     </div>
                 </div>
             </div>
-            <div class="flex justify-center col-span-2">
-                <div class="mt-[2.5rem] grid grid-cols-[repeat(6,130px)] grid-rows-[40px_35px_170px] gap-4">
-                    <h1 class="font-semibold text-3xl flex justify-center col-span-6">Hourly Forecast</h1>
-                    <h2 class="col-span-6 flex justify-center font-normal text-lg mb-16">Local Time</h2>
-                    <div class="items-center flex bg-[#00000007] rounded-md flex-col">
-                        <h2 class="m-4 font-semibold text-lg">Now</h2>
-                        <img data-curr-img src="src/images/partly-cloudy-day.png" alt="partly-cloudy-day" class="w-[70px] h-[70px]">
-                        <h2 data-curr-temp="" class="font-semibold">24°C</h2>
+            <div class="flex justify-center col-span-2 flex-col">                    
+                <h1 class="font-semibold text-3xl flex justify-center col-span-6">Hourly Forecast</h1>
+                <h2 class="col-span-6 flex justify-center font-normal text-lg mb-16">Local Time</h2>
+                <div class="main-carousel">
+                    <div class="carousel-cell">
+                        <div class="items-center flex bg-[#00000007] rounded-md flex-col w-36 m-[0px_15px]">
+                            <h2 class="m-4 font-semibold text-lg">00:00</h2>
+                            <img data-time-zero-img src="src/images/partly-cloudy-day.svg" alt="" class="w-[70px] h-[70px]">
+                            <h2 data-time-zero-temp class="font-semibold">24°C</h2>
+                        </div>
                     </div>
-                    <div class="items-center flex bg-[#00000007] rounded-md flex-col">
-                        <h2 data-time-one class="m-4 font-semibold text-lg">00:00</h2>
-                        <img data-time-one-img src="src/images/partly-cloudy-day.png" alt="partly-cloudy-day" class="w-[70px] h-[70px]">
-                        <h2 data-time-one-temp class="font-semibold">22°C</h2>
+                    <div class="carousel-cell">
+                        <div class="items-center flex bg-[#00000007] rounded-md flex-col w-36 m-[0px_15px]">
+                            <h2 data-time-one class="m-4 font-semibold text-lg">00:00</h2>
+                            <img data-time-one-img src="src/images/partly-cloudy-day.svg" alt="partly-cloudy-day" class="w-[70px] h-[70px]">
+                            <h2 data-time-one-temp class="font-semibold">22°C</h2>
+                        </div>
                     </div>
-                    <div class="items-center flex bg-[#00000007] rounded-md flex-col">
-                        <h2 data-time-two class="m-4 font-semibold text-lg">01:00</h2>
-                        <img data-time-two-img src="src/images/partly-cloudy-day.png" alt="partly-cloudy-day" class="w-[70px] h-[70px]">
-                        <h2 data-time-two-temp class="font-semibold">20°C</h2>
+                    <div class="carousel-cell">
+                        <div class="items-center flex bg-[#00000007] rounded-md flex-col w-36 m-[0px_15px]">
+                            <h2 data-time-two class="m-4 font-semibold text-lg">01:00</h2>
+                            <img data-time-two-img src="src/images/partly-cloudy-day.svg" alt="partly-cloudy-day" class="w-[70px] h-[70px]">
+                            <h2 data-time-two-temp class="font-semibold">20°C</h2>
+                        </div>
                     </div>
-                    <div class="items-center flex bg-[#00000007] rounded-md flex-col">
-                        <h2 data-time-three class="m-4 font-semibold text-lg">02:00</h2>
-                        <img data-time-three-img src="src/images/rain.png" alt="partly-cloudy-day" class="w-[70px] h-[70px]">
-                        <h2 data-time-three-temp class="font-semibold">18°C</h2>
+                    <div class="carousel-cell">
+                        <div class="items-center flex bg-[#00000007] rounded-md flex-col w-36 m-[0px_15px]">
+                            <h2 data-time-three class="m-4 font-semibold text-lg">02:00</h2>
+                            <img data-time-three-img src="src/images/rain.svg" alt="partly-cloudy-day" class="w-[70px] h-[70px]">
+                            <h2 data-time-three-temp class="font-semibold">18°C</h2>
+                        </div>
                     </div>
-                    <div class="items-center flex bg-[#00000007] rounded-md flex-col">
-                        <h2 data-time-four class="m-4 font-semibold text-lg">03:00</h2>
-                        <img data-time-four-img src="src/images/partly-cloudy-day.png" alt="partly-cloudy-day" class="w-[70px] h-[70px]">
-                        <h2 data-time-four-temp class="font-semibold">17°C</h2>
+                    <div class="carousel-cell">
+                        <div class="items-center flex bg-[#00000007] rounded-md flex-col w-36 m-[0px_15px]">
+                            <h2 data-time-four class="m-4 font-semibold text-lg">03:00</h2>
+                            <img data-time-four-img src="src/images/partly-cloudy-day.svg" alt="partly-cloudy-day" class="w-[70px] h-[70px]">
+                            <h2 data-time-four-temp class="font-semibold">17°C</h2>
+                        </div>
                     </div>
-                    <div class="items-center flex bg-[#00000007] rounded-md flex-col">
-                        <h2 data-time-five class="m-4 font-semibold text-lg">00:00</h2>
-                        <img data-time-five-img src="src/images/partly-cloudy-day.png" alt="partly-cloudy-day" class="w-[70px] h-[70px]">
-                        <h2 data-time-five-temp class="font-semibold">22°C</h2>
+                    <div class="carousel-cell">
+                        <div class="items-center flex bg-[#00000007] rounded-md flex-col w-36 m-[0px_15px]">
+                            <h2 data-time-five class="m-4 font-semibold text-lg">00:00</h2>
+                            <img data-time-five-img src="src/images/partly-cloudy-day.svg" alt="partly-cloudy-day" class="w-[70px] h-[70px]">
+                            <h2 data-time-five-temp class="font-semibold">22°C</h2>
+                        </div>
                     </div>
-            </div>
+                    <div class="carousel-cell">
+                        <div class="items-center flex bg-[#00000007] rounded-md flex-col w-36 m-[0px_15px]">
+                            <h2 data-time-five class="m-4 font-semibold text-lg">00:00</h2>
+                            <img data-time-five-img src="src/images/partly-cloudy-day.svg" alt="partly-cloudy-day" class="w-[70px] h-[70px]">
+                            <h2 data-time-five-temp class="font-semibold">22°C</h2>
+                        </div>
+                    </div>
+                    <div class="carousel-cell">
+                        <div class="items-center flex bg-[#00000007] rounded-md flex-col w-36 m-[0px_15px]">
+                            <h2 data-time-five class="m-4 font-semibold text-lg">00:00</h2>
+                            <img data-time-five-img src="src/images/partly-cloudy-day.svg" alt="partly-cloudy-day" class="w-[70px] h-[70px]">
+                            <h2 data-time-five-temp class="font-semibold">22°C</h2>
+                        </div>
+                    </div>
+                    <div class="carousel-cell">
+                        <div class="items-center flex bg-[#00000007] rounded-md flex-col w-36 m-[0px_15px]">
+                            <h2 data-time-five class="m-4 font-semibold text-lg">00:00</h2>
+                            <img data-time-five-img src="src/images/partly-cloudy-day.svg" alt="partly-cloudy-day" class="w-[70px] h-[70px]">
+                            <h2 data-time-five-temp class="font-semibold">22°C</h2>
+                        </div>
+                    </div>
+                    <div class="carousel-cell">
+                        <div class="items-center flex bg-[#00000007] rounded-md flex-col w-36 m-[0px_15px]">
+                            <h2 data-time-five class="m-4 font-semibold text-lg">00:00</h2>
+                            <img data-time-five-img src="src/images/partly-cloudy-day.svg" alt="partly-cloudy-day" class="w-[70px] h-[70px]">
+                            <h2 data-time-five-temp class="font-semibold">22°C</h2>
+                        </div>
+                    </div>
+                    <div class="carousel-cell">
+                        <div class="items-center flex bg-[#00000007] rounded-md flex-col w-36 m-[0px_15px]">
+                            <h2 data-time-five class="m-4 font-semibold text-lg">00:00</h2>
+                            <img data-time-five-img src="src/images/partly-cloudy-day.svg" alt="partly-cloudy-day" class="w-[70px] h-[70px]">
+                            <h2 data-time-five-temp class="font-semibold">22°C</h2>
+                        </div>
+                    </div>
+                    <div class="carousel-cell">
+                        <div class="items-center flex bg-[#00000007] rounded-md flex-col w-36 m-[0px_15px]">
+                            <h2 data-time-five class="m-4 font-semibold text-lg">00:00</h2>
+                            <img data-time-five-img src="src/images/partly-cloudy-day.svg" alt="partly-cloudy-day" class="w-[70px] h-[70px]">
+                            <h2 data-time-five-temp class="font-semibold">22°C</h2>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </section>
-
-    <!-- <img src="src/images/clear-day.png" alt="clear day icon" class="h-[100px]">
-    <img src="src/images/partly-cloudy-day.png" alt="cloudy day icon" class="h-[100px]">
-    <img src="src/images/rain.png" alt="rainy day icon" class="h-[100px]"> -->
 </body>
 </html>
 
