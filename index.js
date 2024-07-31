@@ -48,7 +48,7 @@ function localCityWeather(city)
 			setTimeout(() => inputField.placeholder = 'Enter a City', 1000)
           });
 }
-// Carousel
+
 
 var elem = document.querySelector('.main-carousel');
 var flkty = new Flickity( elem, {
