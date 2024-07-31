@@ -254,7 +254,7 @@ function getDayOfWeek(dateString) {
     hour23ImgSrc = data.days[0].hours[22].icon
     hour22ImgSrc = data.days[0].hours[21].icon
     updateData()
-  }, 1000)
+  }, 5000)
   
 //  Get The day for week forecast
 
