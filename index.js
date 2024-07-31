@@ -1,31 +1,53 @@
 // Gather All Necessary Information!
 let data
 let city
-fetch('https://api.ipify.org?format=json', {mode: 'cors'})
-  .then(response => response.json())
-  .then(location => {
-    console.log('Your Public IP Address:', location);
-    fetch(`http://ip-api.com/json/${location.ip}?fields=status,message,regionName,city`,{mode: 'cors'})
-        .then(result => result.json())
-        .then(result => {
-            city = result.city
-            fetch('https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/' + `${city}` + '?unitGroup=metric&include=days%2Chours%2Ccurrent&key=LSKVJSNUZRML83YMQ5K2MCNKE&contentType=json', {
-                "method": "GET",
-                "headers": {
-                }
+function localCityWeather()
+{
+  fetch('https://api.ipify.org?format=json', {mode: 'cors'})
+    .then(response => response.json())
+    .then(location => {
+      console.log('Your Public IP Address:', location);
+      fetch(`http://ip-api.com/json/${location.ip}?fields=status,message,regionName,city`,{mode: 'cors'})
+          .then(result => result.json())
+          .then(result => {
+              city = result.city
+              fetch('https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/' + `${city}` + '?unitGroup=metric&include=days%2Chours%2Ccurrent&key=LSKVJSNUZRML83YMQ5K2MCNKE&contentType=json', {
+                  "method": "GET",
+                  "headers": {
+                  }
+                  })
+                .then(response => {
+                    return response.json()
                 })
-              .then(response => {
-                  return response.json()
-              })
-              .then(response => data = response)
-              .catch(err => {
-                console.error(err);
-              });
-        })
-  })
-  .catch(error => {
-    console.error('Error fetching IP:', error);
-  })
+                .then(response => data = response)
+                .catch(err => {
+                  console.error(err);
+                });
+          })
+    })
+    .catch(error => {
+      console.error('Error fetching IP:', error);
+    })
+}
+function localCityWeather(city)
+{
+	fetch('https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/' + `${city}` + '?unitGroup=metric&include=days%2Chours%2Ccurrent&key=LSKVJSNUZRML83YMQ5K2MCNKE&contentType=json', {
+        "method": "GET",
+        "headers": {}})
+        .then(response => {
+            return response.json()
+            })
+        .then(response => {
+			inputField.placeholder = 'Enter a City'
+			data = response
+			gatherData(data)
+		})
+        .catch(err => {
+            console.error(err)
+			inputField.placeholder = 'City Not Found!'
+			setTimeout(() => inputField.placeholder = 'Enter a City', 1000)
+          });
+}
 // Carousel
 
 var elem = document.querySelector('.main-carousel');
@@ -182,7 +204,8 @@ function getDayOfWeek(dateString) {
     const dayIndex = date.getDay();
     return daysOfWeek[dayIndex];
 }
-  setTimeout(() => {
+  function gatherData(data)
+  {
     console.log(data)
     address = data.resolvedAddress
     state = data.currentConditions.conditions
@@ -254,7 +277,7 @@ function getDayOfWeek(dateString) {
     hour23ImgSrc = data.days[0].hours[22].icon
     hour22ImgSrc = data.days[0].hours[21].icon
     updateData()
-  }, 5000)
+  }
   
 //  Get The day for week forecast
 
@@ -330,3 +353,14 @@ function updateData()
   hour22Temp.textContent = `${hour22TempSrc}°C`
   hour23Temp.textContent = `${hour23TempSrc}°C`
 }
+
+// City Search
+
+const searchBtn = document.querySelector('[data-btn]')
+const inputField = document.querySelector('[data-input]')
+searchBtn.addEventListener('click', () =>
+{
+  let city = inputField.value
+  inputField.value = ''
+  localCityWeather(city)
+})
